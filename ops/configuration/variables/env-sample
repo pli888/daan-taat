@@ -1,0 +1,20 @@
+###########################################################
+# General Setup
+###########################################################
+
+### Compose files  ###############################################################################################
+# The file paths where docker-compose can file its YAML file
+
+COMPOSE_FILE=ops/deployment/docker-compose.yml
+
+### Application, Framework and Data Path #################################################################################
+# Choose storage path on your machine. For all storage systems.
+
+APPLICATION=../..
+DATA_SAVE_PATH=~/.containers-data/comparedbs
+
+### Core services managed in Docker compose ##############################################################################
+
+POSTGRES_VERSION=9.4
+
+
