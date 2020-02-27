@@ -18,7 +18,7 @@ class DatabaseSearch extends Database
     {
         return [
             [['id'], 'integer'],
-            [['name', 'host', 'port', 'password'], 'safe'],
+            [['name', 'host', 'port', 'username', 'password'], 'safe'],
         ];
     }
 
@@ -64,6 +64,7 @@ class DatabaseSearch extends Database
         $query->andFilterWhere(['ilike', 'name', $this->name])
             ->andFilterWhere(['ilike', 'host', $this->host])
             ->andFilterWhere(['ilike', 'port', $this->port])
+            ->andFilterWhere(['ilike', 'username', $this->username])
             ->andFilterWhere(['ilike', 'password', $this->password]);
 
         return $dataProvider;

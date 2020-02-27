@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'host',
             'port',
+            'username',
             'password',
         ],
     ]) ?>

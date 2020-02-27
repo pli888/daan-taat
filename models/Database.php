@@ -11,6 +11,7 @@ use Yii;
  * @property string $name
  * @property string $host
  * @property string $port
+ * @property string $username
  * @property string $password
  *
  * @property Table[] $tables
@@ -31,8 +32,8 @@ class Database extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'host', 'port', 'password'], 'required'],
-            [['name', 'host', 'port', 'password'], 'string', 'max' => 50],
+            [['name', 'host', 'port', 'username', 'password'], 'required'],
+            [['name', 'host', 'port', 'username', 'password'], 'string', 'max' => 50],
             [['name'], 'unique'],
         ];
     }
@@ -47,6 +48,7 @@ class Database extends \yii\db\ActiveRecord
             'name' => 'Name',
             'host' => 'Host',
             'port' => 'Port',
+            'username' => 'Username',
             'password' => 'Password',
         ];
     }

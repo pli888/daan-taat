@@ -30,7 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'host',
             'port',
-            'password',
+            'username',
+            //'password',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

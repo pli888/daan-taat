@@ -23,7 +23,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'port') ?>
 
-    <?= $form->field($model, 'password') ?>
+    <?= $form->field($model, 'username') ?>
+
+    <?php // echo $form->field($model, 'password') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>
