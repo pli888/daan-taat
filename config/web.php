@@ -2,6 +2,8 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+$db1 = require __DIR__ . '/db1.php';
+$db2 = require __DIR__ . '/db2.php';
 
 $config = [
     'id' => 'basic',
@@ -38,11 +40,16 @@ $config = [
             'targets' => [
                 [
                     'class' => 'yii\log\FileTarget',
+                    'logVars' => [],
                     'levels' => ['error', 'warning'],
+                    'categories' => ['basket'],
+                    'logFile' => '@app/runtime/logs/my.log',
                 ],
             ],
         ],
         'db' => $db,
+        'db1' => $db1,
+        'db2' => $db2,
         /*
         'urlManager' => [
             'enablePrettyUrl' => true,

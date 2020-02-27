@@ -58,6 +58,23 @@ class DatabaseController extends Controller
     }
 
     /**
+     * Displays the list of tables in a database.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionExamine($id)
+    {
+        $row = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
+        Yii::error($row, 'basket');
+
+        return $this->render('examine', [
+            'model' => $this->findModel($id),
+            'tables' => $row,
+        ]);
+    }
+
+    /**
      * Creates a new Database model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
