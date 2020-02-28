@@ -9,6 +9,9 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
+// New
+use app\models\Table;
+
 /**
  * DatabaseController implements the CRUD actions for Database model.
  */
@@ -65,12 +68,57 @@ class DatabaseController extends Controller
      */
     public function actionExamine($id)
     {
-        $row = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
-        Yii::error($row, 'basket');
+        $tab_names = array();  // For storing table names
+        $db1_ht = array();  // For storing columns for each table
+
+        // Query table names
+        $tables = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
+        // Yii::error($rows, 'basket');
+        // Extract table names into an array
+        foreach ($tables as $table)
+            $tab_names[] = $table['table_name'];
+
+        // For each table, get their column names
+        foreach ($tab_names as $tab_name) {
+            $columns = Yii::$app->db1->createCommand("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+            $col_names = array();
+            foreach ($columns as $column) {
+                $col_names[] = $column['column_name'];
+            }
+            $db1_ht[$tab_name]=$col_names; // Add entry
+        }
 
         return $this->render('examine', [
             'model' => $this->findModel($id),
-            'tables' => $row,
+            'table_names' => $tab_names,
+            'tables' => $db1_ht
+        ]);
+    }
+
+    /**
+     * Displays the list of tables in a database.
+     * @param integer $id
+     * @return mixed
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    public function actionSaveDB1Tables($id)
+    {
+        // Query table names
+        $rows = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
+        Yii::error($rows, 'basket');
+
+        // Update database with table names
+        foreach ($rows as $row) {
+            $table_name = $row['table_name'];
+            $table = new Table();
+            $table->database_id = $id;
+            $table->name = $table_name;
+            $table->save();
+        }
+
+        return $this->render('examine', [
+            'model' => $this->findModel($id),
+//            'tables' => $rows,
         ]);
     }
 

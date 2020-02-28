@@ -5,7 +5,9 @@ use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Database */
+/* @var $table_names app\models\Database */
 /* @var $tables app\models\Database */
+
 
 
 $this->title = $model->name;
@@ -43,9 +45,14 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1>Tables:</h1>
     <ul>
         <?
-            foreach ($tables as $table)
-                print "<li> {$table['table_name']}";
+            foreach ($table_names as $table_name) {
+                print "<li> $table_name";
+                print "<ul>";
+                foreach ($tables[$table_name] as $col) {
+                    print "<li> $col";
+                }
+                print "</ul>";
+            }
         ?>
     </ul>
-
 </div>
