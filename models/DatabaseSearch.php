@@ -19,6 +19,7 @@ class DatabaseSearch extends Database
         return [
             [['id'], 'integer'],
             [['name', 'host', 'port', 'username', 'password'], 'safe'],
+            [['imported'], 'boolean'],
         ];
     }
 
@@ -59,6 +60,7 @@ class DatabaseSearch extends Database
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'imported' => $this->imported,
         ]);
 
         $query->andFilterWhere(['ilike', 'name', $this->name])

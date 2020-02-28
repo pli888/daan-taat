@@ -35,6 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'port',
             'username',
             'password',
+            'imported:boolean',
         ],
     ]) ?>
 

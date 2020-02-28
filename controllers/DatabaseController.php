@@ -96,12 +96,12 @@ class DatabaseController extends Controller
     }
 
     /**
-     * Displays the list of tables in a database.
+     * Import table and column metadata into application.
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionSaveDB1Tables($id)
+    public function actionImport($id)
     {
         // Query table names
         $rows = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
@@ -116,9 +116,13 @@ class DatabaseController extends Controller
             $table->save();
         }
 
-        return $this->render('examine', [
+        // Update imported column to true
+        $database = $this->findModel($id);
+        $database->imported = TRUE;
+        $database->save();
+
+        return $this->render('view', [
             'model' => $this->findModel($id),
-//            'tables' => $rows,
         ]);
     }
 

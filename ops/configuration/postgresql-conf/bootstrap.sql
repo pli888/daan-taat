@@ -4,11 +4,12 @@ CREATE TABLE database (
     host VARCHAR(50) NOT NULL,
     port VARCHAR(50) NOT NULL,
     username VARCHAR(50) NOT NULL,
-    password VARCHAR(50) NOT NULL
+    password VARCHAR(50) NOT NULL,
+    imported BOOLEAN NOT NULL
 );
 
-INSERT INTO database(name, host, port, username, password) VALUES ('db1', 'localhost', '54321', 'gigadb', 'vagrant');
-INSERT INTO database(name, host, port, username, password) VALUES ('db2', 'localhost', '54321', 'gigadb', 'vagrant');
+INSERT INTO database(name, host, port, username, password, imported) VALUES ('db1', 'localhost', '54321', 'gigadb', 'vagrant', FALSE);
+INSERT INTO database(name, host, port, username, password, imported) VALUES ('db2', 'localhost', '54321', 'gigadb', 'vagrant', FALSE);
 
 CREATE TABLE "table" (
     id SERIAL PRIMARY KEY ,

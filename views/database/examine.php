@@ -39,10 +39,18 @@ $this->params['breadcrumbs'][] = $this->title;
             'port',
             'username',
             'password',
+            'imported:boolean'
         ],
     ]) ?>
 
-    <h1>Tables:</h1>
+    <h1>Tables</h1>
+    <p>
+        <?
+            if ($model->imported == false)
+                echo Html::a('Import', ['import', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        ?>
+
+    </p>
     <?
     foreach ($table_names as $table_name) {
         print "<div class='panel panel-primary'>";

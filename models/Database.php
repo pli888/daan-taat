@@ -13,6 +13,7 @@ use Yii;
  * @property string $port
  * @property string $username
  * @property string $password
+ * @property bool $imported
  *
  * @property Table[] $tables
  */
@@ -32,7 +33,8 @@ class Database extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name', 'host', 'port', 'username', 'password'], 'required'],
+            [['name', 'host', 'port', 'username', 'password', 'imported'], 'required'],
+            [['imported'], 'boolean'],
             [['name', 'host', 'port', 'username', 'password'], 'string', 'max' => 50],
             [['name'], 'unique'],
         ];
@@ -50,6 +52,7 @@ class Database extends \yii\db\ActiveRecord
             'port' => 'Port',
             'username' => 'Username',
             'password' => 'Password',
+            'imported' => 'Imported',
         ];
     }
 
