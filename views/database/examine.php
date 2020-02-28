@@ -43,16 +43,20 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <h1>Tables:</h1>
-    <ul>
-        <?
-            foreach ($table_names as $table_name) {
-                print "<li> $table_name";
-                print "<ul>";
-                foreach ($tables[$table_name] as $col) {
-                    print "<li> $col[0], $col[1]";
-                }
-                print "</ul>";
-            }
-        ?>
-    </ul>
+    <?
+    foreach ($table_names as $table_name) {
+        print "<div class='panel panel-primary'>";
+        print "<div class='panel-heading'>$table_name</div>";
+        print "<table class='table'>";
+        foreach ($tables[$table_name] as $col) {
+            print "<tr>";
+            print "<td>$col[0]</td>";
+            print "<td>$col[1]</td>";
+            print "</tr>";
+        }
+        print "</table>";
+        print "</div>";
+    }
+    ?>
+
 </div>
