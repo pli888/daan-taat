@@ -49,7 +49,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 print "<li> $table_name";
                 print "<ul>";
                 foreach ($tables[$table_name] as $col) {
-                    print "<li> $col";
+                    print "<li> $col[0], $col[1]";
                 }
                 print "</ul>";
             }

@@ -73,19 +73,19 @@ class DatabaseController extends Controller
 
         // Query table names
         $tables = Yii::$app->db1->createCommand("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name")->queryAll();
-        // Yii::error($rows, 'basket');
         // Extract table names into an array
         foreach ($tables as $table)
             $tab_names[] = $table['table_name'];
 
         // For each table, get their column names
         foreach ($tab_names as $tab_name) {
-            $columns = Yii::$app->db1->createCommand("SELECT * FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+            $columns = Yii::$app->db1->createCommand("SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+            Yii::error($columns, 'basket');
             $col_names = array();
             foreach ($columns as $column) {
-                $col_names[] = $column['column_name'];
+                $col_names[] = [$column['column_name'], $column['data_type']];
             }
-            $db1_ht[$tab_name]=$col_names; // Add entry
+            $db1_ht[$tab_name] = $col_names; // Add entry
         }
 
         return $this->render('examine', [
