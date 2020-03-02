@@ -11,7 +11,7 @@ COMPOSE_FILE=ops/deployment/docker-compose.yml
 # Choose storage path on your machine. For all storage systems.
 
 APPLICATION=../..
-DATA_SAVE_PATH=~/.containers-data/comparedbs
+DATA_SAVE_PATH=~/.containers-data/postgresql
 
 ### Core services managed in Docker compose ##############################################################################
 
