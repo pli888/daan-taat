@@ -80,7 +80,7 @@ CREATE TABLE public.pr0ducts (
 -- Name: products_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
-CREATE SEQUENCE public.products_id_seq
+CREATE SEQUENCE public.pr0ducts_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -92,7 +92,7 @@ CREATE SEQUENCE public.products_id_seq
 -- Name: products_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
-ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
+ALTER SEQUENCE public.pr0ducts_id_seq OWNED BY public.pr0ducts.id;
 
 
 --
@@ -101,10 +101,10 @@ ALTER SEQUENCE public.products_id_seq OWNED BY public.products.id;
 
 CREATE TABLE public.purchase_items (
     id integer NOT NULL,
-    purchase_1d integer,
+    purchase_id integer,
     product_id integer,
     price numeric,
-    quantity integer,
+    quant1ty integer,
     state character varying(255)
 );
 
@@ -199,7 +199,7 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 -- Name: id; Type: DEFAULT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.products ALTER COLUMN id SET DEFAULT nextval('public.products_id_seq'::regclass);
+ALTER TABLE ONLY public.pr0ducts ALTER COLUMN id SET DEFAULT nextval('public.pr0ducts_id_seq'::regclass);
 
 
 --
@@ -227,7 +227,7 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: products; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.products (id, title, price, created_at, deleted_at, tags) FROM stdin;
+COPY public.pr0ducts (id, title, price, created_at, deleted_at, tags) FROM stdin;
 1	Dictionary	9.99	2011-01-01 20:00:00+00	\N	{Book}
 2	Python Book	29.99	2011-01-01 20:00:00+00	\N	{Book,Programming,Python}
 3	Ruby Book	27.99	2011-01-01 20:00:00+00	\N	{Book,Programming,Ruby}
@@ -255,14 +255,14 @@ COPY public.products (id, title, price, created_at, deleted_at, tags) FROM stdin
 -- Name: products_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.products_id_seq', 20, true);
+SELECT pg_catalog.setval('public.pr0ducts_id_seq', 20, true);
 
 
 --
 -- Data for Name: purchase_items; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.purchase_items (id, purchase_id, product_id, price, quantity, state) FROM stdin;
+COPY public.purchase_items (id, purchase_id, product_id, price, quant1ty, state) FROM stdin;
 2	1	3	27.99	1	Delivered
 3	1	8	108.00	1	Delivered
 4	2	1	9.99	2	Delivered
@@ -2814,7 +2814,7 @@ SELECT pg_catalog.setval('public.users_id_seq', 50, true);
 -- Name: products_pkey; Type: CONSTRAINT; Schema: public; Owner: -; Tablespace: 
 --
 
-ALTER TABLE ONLY public.products
+ALTER TABLE ONLY public.pr0ducts
     ADD CONSTRAINT products_pkey PRIMARY KEY (id);
 
 
@@ -2839,7 +2839,7 @@ ALTER TABLE ONLY public.users
 --
 
 ALTER TABLE ONLY public.purchase_items
-    ADD CONSTRAINT purchase_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id);
+    ADD CONSTRAINT purchase_items_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.pr0ducts(id);
 
 
 --
