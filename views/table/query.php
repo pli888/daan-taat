@@ -8,6 +8,7 @@ use yii\grid\GridView;
 /* @var $dataProvider yii\data\ActiveDataProvider */
 /* @var $db1_ht array of string table names */
 /* @var $tables_imported boolean to check if database has been imported yet */
+/* @var $database_id */
 
 
 $this->title = 'Tables';
@@ -19,7 +20,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?
         if ($tables_imported == FALSE) {
-            echo Html::a('Import Tables', ['import', 'database_id' => '1'], ['class' => 'btn btn-primary']);
+            echo Html::a('Import Tables', ['import', 'database_id' => $database_id], ['class' => 'btn btn-primary']);
             echo "<hr>";
         }
     ?>

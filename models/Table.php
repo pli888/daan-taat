@@ -97,7 +97,11 @@ class Table extends \yii\db\ActiveRecord
 
         // For each table, get their column names
         foreach ($tab_names as $tab_name) {
-            $columns = Yii::$app->db1->createCommand("SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+            if ($database->name == "db1")
+                $columns = Yii::$app->db1->createCommand("SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+            else
+                $columns = Yii::$app->db2->createCommand("SELECT column_name, data_type FROM information_schema.columns WHERE table_schema = 'public' AND table_name = '$tab_name'")->queryAll();
+
             Yii::error($columns, 'database_import');
             $col_names = array();
             foreach ($columns as $column) {

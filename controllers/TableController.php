@@ -143,7 +143,8 @@ class TableController extends Controller
 
         return $this->render('query', [
             'db1_ht' => $db1_ht,
-            'tables_imported' => $database->imported
+            'tables_imported' => $database->imported,
+            'database_id' => $database_id
         ]);
     }
 
